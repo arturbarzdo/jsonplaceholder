@@ -6,7 +6,7 @@
 <?php
 function validate($code) 
 { 
-  if(preg_match_all('/[0-9]{2}[-][0-9]{3}/', $code))
+  if(preg_match_all('/[0-9]{5}[-][0-9]{4}/', $code))
 	  {return true;} 
   else 
   {return false;} 
