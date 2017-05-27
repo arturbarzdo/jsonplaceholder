@@ -53,24 +53,28 @@ for ($i = 0; $i< $countUserId;$i++ ){
 		
 		for($j = 0; $j < $countArray2; $j++){
 			$zipCode = $array2[$j]["address"]["zipcode"];
-			$zipCode = validate($zipCode);
+			$validate = validate($zipCode);
 			if($user == $array2[$j]["id"]){
-				if($zipCode=="1"){
+				if(($validate == "1")&&(strlen($zipCode)==9)){
 				$usersId[]=$array2[$j]["id"];
 			}}
 		}
 	
  }
 //print var_dump($array2);
-print var_dump($usersId);
+//print var_dump($usersId);
 //print $array2[5]["address"]["zipcode"];
-$url="http://jsonplaceholder.typicode.com/users?"; 
-for ($i = 0; $i< count($usersId);$i++ ){
-	$url.="&id=".$usersId[$i];
+if(isset($usersId)){
+		$url="http://jsonplaceholder.typicode.com/users?"; 
+
+		for ($i = 0; $i< count($usersId);$i++ ){
+			$url.="&id=".$usersId[$i];
+		}
+		header("location:$url");
 }
-
-header("location:$url");
-
+else{
+print "Nie znaleziono rekordu odpowiadającemu kryteriom wyszukiwania";
+}
 ?>
 
 </body>
